@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Hello, World!!</title>
+</head>
+<body>
+<div>Test</div>
+<div style="display: flex; flex-direction: row; height: 100%">
+    <div id="blocks" style="width: 80%"></div>
+    <div id="pythonArea" style="width: 20%">python workspace</div>
+</div>
+<script src="scratch-block-test.js"></script>
+<script src="python_compressed.js"></script>
+<script src="jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function myUpdateFunction(event) {
+        let code = '234';
+        try {
+            code = Blockly.Python.workspaceToCode(workspace);
+            document.getElementById('pythonArea').value = code;
+            console.log(code);
+            let content = "<li>" + code + "</li>";
+            $('#pythonArea').append(content);
+        }catch (e) {
+            console.log('err...');
+            // $('#pythonArea').append(`<li>234</li>`)
+        }
+    }
+    workspace.addChangeListener(myUpdateFunction);
+    //定义好收集的代码
+    Blockly.Python.control_if = function (a) {
+        Blockly.Python.definitions_.import_if = "import if\nif()";
+        let b = Blockly.Python.valueToCode(a, "VALUE", Blockly.Python.ORDER_NONE) || "0";
+        let content = "<li> if (" + b + ")</li>";
+        $('#pythonArea').append(content);
+        console.log("if" + "(" + b + ")\n");
+        // return "if" + a.getFieldValue("DIR") + "(" + b + ")\n"
+        return "if" + "(" + b + ")\n";
+    };
+    Blockly.Python.control_forever = function (a) {
+        Blockly.Python.definitions_.import_forever = "import forever\nforever()";
+        let b = Blockly.Python.valueToCode(a, "VALUE", Blockly.Python.ORDER_NONE) || "0";
+        let content = "<li> forever (" + b + ")</li>";
+        $('#pythonArea').append(content);
+        console.log("forever" + "(" + b + ")\n");
+        // return "forever." + a.getFieldValue("DIR") + "(" + b + ")\n"
+        return "forever" + "(" + b + ")\n";
+    };
+</script>
+</body>
+</html>

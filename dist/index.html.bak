@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Hello, World!!</title>
+</head>
+<body>
+<div>Test</div>
+<div id="blocks"></div>
+<script src="scratch-block-test.js"></script>
+<script src="blockly_compressed.js"></script>
+<script src="python_compressed.js"></script>
+
+<script type="text/javascript">
+    // function myUpdateFunction(event) {
+    //     console.log('myUpdateFunction is running');
+    //     let code = Blockly.Python.workspaceToCode(workspace);
+    //     document.getElementById('textarea').value = code;
+    // }
+    // workspace.addChangeListener(myUpdateFunction);
+    //定义好收集的代码
+
+    Blockly.Python.control_if = function (a) {
+        console.log("Blockly_Python is running");
+        Blockly.Python.definitions_.import_turtle = "import turtle\nturtle=turtle.Turtle()";
+        let b = Blockly.Python.valueToCode(a, "VALUE", Blockly.Python.ORDER_NONE) || "0";
+        console.log("turtle." + a.getFieldValue("DIR") + "(" + b + ")\n");
+        return "turtle." + a.getFieldValue("DIR") + "(" + b + ")\n"
+    };
+    let code = Blockly.Python.workspaceToCode(workspace)
+    console.log('code' + code);
+</script>
+</body>
+</html>
